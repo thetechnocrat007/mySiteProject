@@ -3,6 +3,11 @@
 
 {% block mycss %}
 <style>
+    html {
+    scroll-behavior: smooth;
+    }
+
+
     a.one:link {color:#ff0000;text-decoration:none;}
     a.one:hover {font-size:150%;}
 
@@ -13,6 +18,11 @@
     }
 
 
+    .img-fluid {
+    max-width: 100%;
+    height: auto;
+    }
+
 
 
 </style>
@@ -22,19 +32,23 @@
 <title>{% block title %} The Technocrat | Home {% endblock title %}</title>
 
 
-<div class="container mt-6 " >
-    {% load static %}
-<div class="full-height" ><img src="{% static 'images/backgimg.gif' %}" alt="Be patient..." /></div>
-<a href="#" class="one">
-    <img src="https://www.intactsoftware.com/wp-content/themes/intact2019/img/scroll.svg" class="img-fluid" alt=""> <span class="text">Scroll down<span> for more</span></span>
-</a>
-</div>
+
 
 <div class="container">
-    <div class="row">
+
+    {% load static %}
+    <div class="full-height" ><img class="img-fluid" src="{% static 'images/backgimg.gif' %}" alt="Be patient..." /></div>
+        <a href="#blog_section1" class="one">
+            <img src="https://www.intactsoftware.com/wp-content/themes/intact2019/img/scroll.svg"  alt=""> <span class="text">Scroll down<span> for more</span></span>
+        </a>
+
+    <a name="blog_section1"></a>
+    <div class="row row-cols-1 row-cols-md-2">
+
         <!-- Blog Entries Column -->
-        <div class="col-md-8 mt-3 left">
-            {% for post in post_list %}
+        {% for post in post_list %}
+        <div class="col mt-3">
+
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ post.title }}</h2>
@@ -44,9 +58,9 @@
                     <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>
-            {% endfor %}
+
         </div>
-        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+{% endfor %}
     </div>
 </div>
 {%endblock%}
